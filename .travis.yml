@@ -22,13 +22,12 @@ before_install:
     fi
 
 script: 
-  - make -C examples/example_glfw_opengl2
-  - make -C examples/example_glfw_opengl3
-  - make -C examples/example_sdl_opengl3
   - if [ $TRAVIS_OS_NAME == linux ]; then 
-      cmake -Hexamples/example_sdl_vulkan -Bexamples/example_sdl_vulkan/build;
-      cmake --build examples/example_sdl_vulkan/build;
+      cmake -Hexamples -Bexamples/build;
+      cmake --build examples/build;
     fi
   - if [ $TRAVIS_OS_NAME == osx ]; then 
+      cmake -Hexamples -Bexamples/build -DBUILD_EXAMPLES_VULKAN=OFF;
+      cmake --build examples/build;
       xcodebuild -project examples/example_apple_metal/example_apple_metal.xcodeproj -target example_apple_metal_macos;
     fi
