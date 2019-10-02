@@ -18,9 +18,8 @@ for:
       - cmd: .\VulkanSDK.exe /S
       - cmd: set VULKAN_SDK=C:\VulkanSDK\1.1.121.2
 
-      - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
-      # Required by -Gninja and vcpkg
-      - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
+      # Required by vcpkg
+      - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
       - cmd: vcpkg install glfw3:x64-windows sdl2[vulkan]:x64-windows
     build_script:
       - cmd: cmake -Hexamples -B_build_%TOOLCHAIN%_Debug -G "%GENERATOR%" -DBUILD_EXAMPLES_SDL=ON -DBUILD_EXAMPLES_GLFW=ON -DBUILD_EXAMPLES_OPENGL2=ON -DBUILD_EXAMPLES_OPENGL3=ON -DBUILD_EXAMPLES_VULKAN=ON -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake
