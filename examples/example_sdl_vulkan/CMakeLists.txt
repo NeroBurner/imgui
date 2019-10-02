@@ -55,3 +55,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   SDL2::SDL2
   Vulkan::Vulkan)
 
+if (WIN32)
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+    SDL2::SDL2main)
+endif()
