@@ -11,14 +11,12 @@ for:
     environment:
       GENERATOR: "Visual Studio 15 2017 Win64"
     install:
-      ############################################################################
       # Install Vulkan
-      ############################################################################
       - cmd: curl -L --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.1.121.2/windows/VulkanSDK-1.1.121.2-Installer.exe?Human=true
       - cmd: .\VulkanSDK.exe /S
       - cmd: set VULKAN_SDK=C:\VulkanSDK\1.1.121.2
 
-      # Required by vcpkg
+      # Use vcpkg to provide glfw and sdl2
       - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
       - cmd: vcpkg install glfw3:x64-windows sdl2[vulkan]:x64-windows
     build_script:
